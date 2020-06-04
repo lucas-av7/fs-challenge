@@ -1,0 +1,28 @@
+{
+  "name": "fs-challenge",
+  "version": "1.0.0",
+  "description": "Desafio para vagas full-stack de Instituto Atlântico",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucas-av7/fs-challenge.git"
+  },
+  "author": "Lucas Vasconcelos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucas-av7/fs-challenge/issues"
+  },
+  "homepage": "https://github.com/lucas-av7/fs-challenge#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
