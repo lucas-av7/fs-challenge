@@ -14,7 +14,8 @@ export default class Main extends Component {
         searchText: '',
         loading: false,
         home: true,
-        notFound: false
+        notFound: false,
+        searchLoad: null
     }
 
     componentDidMount() {
@@ -56,8 +57,18 @@ export default class Main extends Component {
             <div className="container">
 
                 <div className="searchBox">
-                    <input onInput={(e) => this.setState({searchText: e.target.value})} type="text" placeholder="Search by movie title" />
-                    <button onClick={this.loadMovies}>Search</button>
+                    <input onChange={(e) => {
+
+                        if(e.target.value === ' ') {e.target.value = ''; return };
+
+                        const { searchLoad } = this.state;
+
+                        if(searchLoad) clearTimeout(searchLoad);
+                        this.setState({
+                            searchText: e.target.value,
+                            searchLoad: setTimeout(this.loadMovies, 2000)
+                        });
+                        }} type="text" placeholder="Search by movie or series title" />
                 </div>
 
                 <div className={loading ? 'loadingOn' : 'loadingOff'}></div>
@@ -65,17 +76,19 @@ export default class Main extends Component {
                 <div className={home || notFound ? 'homeImgsOn' : 'homeImgsOff'}>
                     <div className={home ? 'homeOn' : 'homeOff'}>
                     <img src={Cinema} alt="Cinema" />
+                    <h2>Search for movies and series</h2>
                     </div>
                     <div className={notFound ? 'notFoundOn' : 'notFoundOff'}>
                     <img src={Void} alt="Not Found" />
+                    <h2>Not found or too many results</h2>
                     </div>
                 </div>
 
                 <div className="movieList">
                     { movies.map(movie => (
                         
-                        <Link to={`/movie/${movie.imdbID}`}>
-                            <article key={movie.imdbID}>
+                        <Link key={movie.imdbID} to={`/movie/${movie.imdbID}`}>
+                            <article>
                                 <img src={movie.Poster} alt={movie.Title} />
                                 <section className="rate">
                                     <p>{movie.imdbRating}</p>

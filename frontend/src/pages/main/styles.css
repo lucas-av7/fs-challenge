@@ -7,7 +7,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .searchBox {
@@ -23,22 +22,9 @@
     height: 40px;
     border: none;
     outline: none;
-    border-radius: 6px 0 0 6px;
+    border-radius: 6px;
     box-sizing: border-box;
     padding: 5px;
-}
-
-.searchBox button {
-    width: 100px;
-    height: 40px;
-    border: none;
-    outline: none;
-    border-radius: 0 6px 6px 0;
-    background-color: #D62828;
-    color: #EAE2B7;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 .movieList {
@@ -46,6 +32,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
+    padding-bottom: 60px;
 }
 
 .movieList article {
@@ -110,7 +97,6 @@
 
 .loadingOn {
     position: absolute;
-    left: 50%;
     top: 50%;
     display: block;
     width: 50px;
@@ -154,13 +140,14 @@
 
 .homeOn,
 .notFoundOn {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
+    text-align: center;
 }
 
 .homeOn img,
 .notFoundOn img {
-    width: 100%;
+    width: 280px;
 }
 
 .homeOff,
