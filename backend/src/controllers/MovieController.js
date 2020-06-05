@@ -1,15 +1,13 @@
-const axios = require('axios');
-
-const api = 'http://www.omdbapi.com/?apikey=75a7cb8b&';
+const api = require('../services/api');
 
 module.exports = {
       async getMovies(req, res) {
-        const movies = await axios.get(api + `s=${req.params.s}`);
-        return res.send(JSON.stringify(movies.data));
+        const movies = await api.get('&s=' + req.params.s);
+        return res.send(movies.data);
       },
       
       async getData(req, res) {
-        const movie = await axios.get(api + `i=${req.params.i}`);
-        return res.send(JSON.stringify(movie.data));
+        const movie = await api.get('&i=' + req.params.i);
+        return res.send(movie.data);
       }
 }
