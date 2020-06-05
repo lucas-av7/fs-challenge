@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
+import Cinema from './img/cinema.svg';
+import Void from './img/void.svg';
 
 import './styles.css'
 
@@ -10,7 +12,9 @@ export default class Main extends Component {
         movies: [],
         page: 1,
         searchText: '',
-        loading: false
+        loading: false,
+        home: true,
+        notFound: false
     }
 
     componentDidMount() {
@@ -20,7 +24,7 @@ export default class Main extends Component {
     loadMovies = async () => {
         const { searchText } = this.state;
         if(searchText === '') return;
-        this.setState({loading: true, movies: []});
+        this.setState({loading: true, movies: [], home: false, notFound: false});
         const responseSearch = await api.get(`/search/${searchText}`);
         const { Search, totalResults, Response } = responseSearch.data;
 
@@ -38,24 +42,35 @@ export default class Main extends Component {
     
             const valores = await Promise.all(Movies);
     
-            this.setState({movies: valores, page: totalResults, loading: false});
+            this.setState({movies: valores, page: totalResults, loading: false, notFound: false, home: false});
         } else {
-            this.setState({movies: [], page: 1, loading: false});
+            this.setState({movies: [], page: 1, loading: false, notFound: true, home: false});
         }
     };
 
 
     render() {
-        const { movies, page, loading } = this.state;
+        const { movies, page, loading, home, notFound } = this.state;
 
         return (
             <div className="container">
-                <div className={loading ? 'loadingOn' : 'loadingOff'}></div>
 
                 <div className="searchBox">
                     <input onInput={(e) => this.setState({searchText: e.target.value})} type="text" placeholder="Search by movie title" />
                     <button onClick={this.loadMovies}>Search</button>
                 </div>
+
+                <div className={loading ? 'loadingOn' : 'loadingOff'}></div>
+
+                <div className={home || notFound ? 'homeImgsOn' : 'homeImgsOff'}>
+                    <div className={home ? 'homeOn' : 'homeOff'}>
+                    <img src={Cinema} alt="Cinema" />
+                    </div>
+                    <div className={notFound ? 'notFoundOn' : 'notFoundOff'}>
+                    <img src={Void} alt="Not Found" />
+                    </div>
+                </div>
+
                 <div className="movieList">
                     { movies.map(movie => (
                         
