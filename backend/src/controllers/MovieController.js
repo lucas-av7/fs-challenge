@@ -1,13 +1,13 @@
-const api = require('../services/api');
+const {api, apiSearch, apiData} = require('../services/api');
 
 module.exports = {
       async getMovies(req, res) {
-        const movies = await api.get('&s=' + req.params.s);
+        const movies = await api.get(apiSearch + req.params.s);
         return res.send(movies.data);
       },
       
       async getData(req, res) {
-        const movie = await api.get('&i=' + req.params.i);
+        const movie = await api.get(apiData + req.params.i);
         return res.send(movie.data);
       }
 }

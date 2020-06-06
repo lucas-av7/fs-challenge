@@ -1,5 +1,6 @@
-const axios = require('axios');
+const api = require('axios');
 
-const api =  axios.create({ baseURL: 'http://www.omdbapi.com/?apikey=75a7cb8b&'});
+const apiSearch = `http://www.omdbapi.com/?apikey=${process.env.IMDB_API_KEY}&s=`;
+const apiData = `http://www.omdbapi.com/?apikey=${process.env.IMDB_API_KEY}&i=`;
 
-module.exports = api;
+module.exports = { api, apiSearch, apiData };
