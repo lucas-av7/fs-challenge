@@ -18,13 +18,21 @@
 
 .searchBox input {
     width: 90%;
-    max-width: 600px;
-    height: 40px;
+    max-width: 250px;
+    height: 50px;
     border: none;
     outline: none;
     border-radius: 6px;
     box-sizing: border-box;
     padding: 5px;
+    transition: max-width 400ms;
+    font-size: 18px;
+    text-align: center;
+}
+
+.searchBox input:focus {
+    max-width: 500px;
+    box-shadow: 0 0 0 4px #7159C1;
 }
 
 .movieList {
@@ -33,6 +41,20 @@
     justify-content: center;
     margin-top: 20px;
     padding-bottom: 60px;
+    animation: showMovies 400ms forwards;
+    animation-delay: 200ms;
+    opacity: 0;
+}
+
+@keyframes showMovies {
+    0% {
+        opacity: 0;
+        transform: scale(1.5)
+    }
+    100% {
+        opacity: 1; 
+        transform: scale(1)
+    }
 }
 
 .movieList article {
@@ -55,11 +77,15 @@
     opacity: 1;
 }
 
+.movieListOff {
+    display: none;
+}
+
 .rate {
     opacity: 0;
     width: 38px;
     height: 38px;
-    background-color: #D62828;
+    background-color: #7159C1;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -69,7 +95,7 @@
     justify-content: center;
     transition: opacity 0.3s;
     font-weight: bold;
-    color: #EAE2B7;
+    color: white;
     border-radius: 5px;
 }
 
@@ -88,7 +114,7 @@
 }
 
 .movieInfo strong {
-    color: #D62828;
+    color: #7159C1;
 }
 
 .movieInfo p {
@@ -103,7 +129,7 @@
     height: 50px;
     border-radius: 50%;
     border: 5px solid;
-    border-color: #D62828 #D62828 #EAE2B7;
+    border-color: #7159C1 #7159C1 white;
     animation: loading linear 1.5s infinite;
 }
 
@@ -139,19 +165,50 @@
 }
 
 .homeOn,
-.notFoundOn {
+.errorOn {
     width: 400px;
     height: 400px;
     text-align: center;
 }
 
 .homeOn img,
-.notFoundOn img {
+.errorOn img {
     width: 280px;
 }
 
 .homeOff,
-.notFoundOff {
+.errorOff {
     display: none;
 }
 
+.order {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 20px;
+    
+}
+
+.order button {
+    border: 4px solid #7159C1;
+    outline: none;
+    width: 130px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    background: transparent;
+    transition-duration: 400ms;
+    color: white;
+}
+
+.order button:nth-child(1) {
+    border-radius: 6px 0 0 6px;
+}
+
+.order button:nth-child(2) {
+    border-radius: 0 6px 6px 0;
+}
+
+.order button:disabled {
+    cursor: not-allowed;
+    background: #7159C1;
+}

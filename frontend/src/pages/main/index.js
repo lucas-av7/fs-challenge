@@ -10,12 +10,14 @@ export default class Main extends Component {
 
     state = {
         movies: [],
-        page: 1,
         searchText: '',
         loading: false,
         home: true,
-        notFound: false,
-        searchLoad: null
+        searchLoad: null,
+        Error: '',
+        recent: true,
+        rating: false,
+        moviePage: false
     }
 
     componentDidMount() {
@@ -23,11 +25,11 @@ export default class Main extends Component {
     }
 
     loadMovies = async () => {
-        const { searchText } = this.state;
+        const { searchText, recent } = this.state;
         if(searchText === '') return;
-        this.setState({loading: true, movies: [], home: false, notFound: false});
+        this.setState({loading: true, movies: [], home: false, Error: '', moviePage: false});
         const responseSearch = await api.get(`/search/${searchText}`);
-        const { Search, totalResults, Response } = responseSearch.data;
+        const { Search, Response } = responseSearch.data;
 
         if(Response === 'True') {
             const Movies = Search.map(async movie => {
@@ -41,17 +43,74 @@ export default class Main extends Component {
                 return newMovie;
             })
     
-            const valores = await Promise.all(Movies);
+            let valores = await Promise.all(Movies);
+
+            // Removendo objetos duplicados
+            valores = UniqueArraybyId(valores ,"imdbID");
+
+            function UniqueArraybyId(collection, keyname) {
+                      let output = [], 
+                          keys = [];
+        
+                      collection.forEach(item => {
+                          let key = item[keyname];
+                          if(keys.indexOf(key) === -1) {
+                              keys.push(key);
+                              output.push(item);
+                          }
+                      });
+                return output;
+           };
     
-            this.setState({movies: valores, page: totalResults, loading: false, notFound: false, home: false});
+            this.setState({movies: valores, loading: false, Error: '', home: false, moviePage: true});
+
+            if(recent) {
+                this.recentOrder();
+            } else {
+                this.ratingOrder();
+            }
         } else {
-            this.setState({movies: [], page: 1, loading: false, notFound: true, home: false});
+            const { Error } = responseSearch.data;
+            this.setState({movies: [], loading: false, home: false, Error, moviePage: false});
         }
     };
 
+    recentOrder = () => {
+        const { movies } = this.state;
+        movies.sort((a, b) => {
+            const numberA = parseInt(a.Year);
+            const numberB = parseInt(b.Year);
+
+            if (numberB < numberA) {
+                return -1;
+            } else if (numberA < numberB) {
+                return 1;
+            }
+            else return 0;
+        });
+        this.setState({movies, recent: true, rating: false});
+    }
+
+    ratingOrder = () => {
+        const { movies } = this.state;
+        movies.sort((a, b) => {
+            const numberA = parseFloat(a.imdbRating);
+            const numberB = parseFloat(b.imdbRating);
+
+            if (numberB < numberA) {
+                return -1;
+              }
+            else if (numberA < numberB) {
+                return 1;
+              }
+            else return 0;
+        });
+        this.setState({movies, recent: false, rating: true});
+    }
+
 
     render() {
-        const { movies, page, loading, home, notFound } = this.state;
+        const { movies, loading, home, Error, recent, rating, moviePage } = this.state;
 
         return (
             <div className="container">
@@ -68,23 +127,27 @@ export default class Main extends Component {
                             searchText: e.target.value,
                             searchLoad: setTimeout(this.loadMovies, 2000)
                         });
-                        }} type="text" placeholder="Search by movie or series title" />
+                        }} type="text" placeholder="Search by movie title"/>
                 </div>
 
                 <div className={loading ? 'loadingOn' : 'loadingOff'}></div>
 
-                <div className={home || notFound ? 'homeImgsOn' : 'homeImgsOff'}>
+                <div className={home || Error ? 'homeImgsOn' : 'homeImgsOff'}>
                     <div className={home ? 'homeOn' : 'homeOff'}>
                     <img src={Cinema} alt="Cinema" />
                     <h2>Search for movies and series</h2>
                     </div>
-                    <div className={notFound ? 'notFoundOn' : 'notFoundOff'}>
+                    <div className={Error ? 'errorOn' : 'errorOff'}>
                     <img src={Void} alt="Not Found" />
-                    <h2>Not found or too many results</h2>
+                    <h2>{Error}</h2>
                     </div>
                 </div>
 
-                <div className="movieList">
+                <div className={moviePage ? 'movieList' : 'movieListOff'}>
+                    <div className="order">
+                        <button disabled={recent} onClick={this.recentOrder}>Most Recent</button>
+                        <button disabled={rating} onClick={this.ratingOrder}>Highest Rating</button>
+                    </div>
                     { movies.map(movie => (
                         
                         <Link key={movie.imdbID} to={`/movie/${movie.imdbID}`}>
