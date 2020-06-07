@@ -35,10 +35,11 @@ export default class Main extends Component {
             const Movies = Search.map(async movie => {
                 const id = movie.imdbID;
                 const responseMovie = await api.get(`/movie/${id}`);
-                const {Genre, imdbRating} = responseMovie.data;
+                const {Genre, imdbRating, Plot} = responseMovie.data;
                 const newMovie = movie;
                 newMovie['Genre'] = Genre;
                 newMovie['imdbRating'] = imdbRating;
+                newMovie['Plot'] = Plot;
     
                 return newMovie;
             })
@@ -160,6 +161,8 @@ export default class Main extends Component {
                                     <strong>{movie.Title}</strong>
                                     <p>{movie.Year}</p>
                                     <p>{movie.Genre}</p>
+                                    <br />
+                                    <p>{movie.Plot}</p>
                                 </section>
                             </article>
                         </Link>

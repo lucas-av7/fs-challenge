@@ -87,8 +87,8 @@
     height: 38px;
     background-color: #7159C1;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 8px;
+    right: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,20 +97,24 @@
     font-weight: bold;
     color: white;
     border-radius: 5px;
+    z-index: 2;
 }
 
 .movieInfo {
     width: 100%;
-    height: 100px;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
     position: absolute;
-    bottom: -100px;
+    bottom: -346px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: bottom 0.3s;
     text-align: center;
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .movieInfo strong {
