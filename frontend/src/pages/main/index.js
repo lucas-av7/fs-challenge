@@ -10,13 +10,12 @@ export default class Main extends Component {
 
     state = {
         movies: [],
-        searchText: '',
+        searchText: this.props.location.state === undefined ? '' : this.props.location.state.searchText,
         loading: false,
         home: true,
         searchLoad: null,
         Error: '',
-        recent: true,
-        rating: false,
+        recent: this.props.location.state === undefined ? true : this.props.location.state.recent,
         moviePage: false
     }
 
@@ -89,7 +88,7 @@ export default class Main extends Component {
             }
             else return 0;
         });
-        this.setState({movies, recent: true, rating: false});
+        this.setState({movies, recent: true});
     }
 
     ratingOrder = () => {
@@ -106,12 +105,12 @@ export default class Main extends Component {
               }
             else return 0;
         });
-        this.setState({movies, recent: false, rating: true});
+        this.setState({movies, recent: false});
     }
 
 
     render() {
-        const { movies, loading, home, Error, recent, rating, moviePage } = this.state;
+        const { movies, loading, home, Error, recent, moviePage, searchText } = this.state;
 
         return (
             <div className="container">
@@ -119,7 +118,7 @@ export default class Main extends Component {
                 <div className="searchBox">
                     <input onChange={(e) => {
 
-                        if(e.target.value === ' ') {e.target.value = ''; return };
+                        if(e.target.value[0] === ' ') {e.target.value = ''; return };
 
                         const { searchLoad } = this.state;
 
@@ -128,7 +127,7 @@ export default class Main extends Component {
                             searchText: e.target.value,
                             searchLoad: setTimeout(this.loadMovies, 1500)
                         });
-                        }} type="text" placeholder="Search by movie title"/>
+                        }} type="text" placeholder="Search by movie title" value={searchText}/>
                 </div>
 
                 <div className={loading ? 'loadingOn' : 'loadingOff'}></div>
@@ -147,11 +146,11 @@ export default class Main extends Component {
                 <div className={moviePage ? 'movieList' : 'movieListOff'}>
                     <div className="order">
                         <button disabled={recent} onClick={this.recentOrder}>Most Recent</button>
-                        <button disabled={rating} onClick={this.ratingOrder}>Highest Rating</button>
+                        <button disabled={!recent} onClick={this.ratingOrder}>Highest Rating</button>
                     </div>
                     { movies.map(movie => (
                         
-                        <Link key={movie.imdbID} to={`/movie/${movie.imdbID}`}>
+                        <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent} }}>
                             <article>
                                 <img src={movie.Poster} alt={movie.Title} />
                                 <section className="rate">

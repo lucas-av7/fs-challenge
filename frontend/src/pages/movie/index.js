@@ -22,7 +22,8 @@ export default class Movie extends Component {
     }
 
     render() {
+        const { searchText, recent } = this.props.location.state;
         return (
-        <div></div>
+        <div><Link to={{ pathname: '/', state: { searchText, recent } }}>Voltar</Link></div>
     )}
 }
