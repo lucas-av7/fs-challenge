@@ -8,7 +8,8 @@ export default class Movie extends Component {
 
     state = {
         movieId: this.props.match.params.i,
-        movieData: {}
+        movieData: {},
+        loading: true
     }
 
     componentDidMount() {
@@ -18,15 +19,16 @@ export default class Movie extends Component {
     loadDataMovie = async () => {
         const { movieId } = this.state;
         const responseMovie = await api.get(`/movie/${movieId}`);
-        this.setState({ movieData: responseMovie.data });
+        this.setState({ movieData: responseMovie.data, loading: false });
     }
 
     render() {
         const { searchText, recent } = this.props.location.state;
-        const { movieData } = this.state;
+        const { movieData, loading } = this.state;
         return (
         <div className="containerMovie">
-            <div className="movieData">
+            <div className={loading ? 'loadingOn' : 'lodingOff'}></div>
+            <div className={!loading ? 'movieDataOn' : 'movieDataOff'}>
                 <div className="movieDesc">
                     <Link to={{ pathname: '/', state: { searchText, recent } }}>Voltar</Link>
                     <p>{movieData.Runtime} - {movieData.Year}</p>

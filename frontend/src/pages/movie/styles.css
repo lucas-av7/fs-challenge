@@ -4,9 +4,11 @@
     min-height: 100vh;
     max-height: auto;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
-.movieData {
+.movieDataOn {
     width: 100%;
     min-height: 100vh;
     max-height: auto;
@@ -15,11 +17,15 @@
     justify-content: center;
 }
 
+.movieDataOff {
+    display: none;
+}
+
 .movieDesc {
     width: 50%;
 }
 
-.movieData img {
+.movieDataOn img {
     height: 500px;
     border-radius: 20px;
 }
@@ -30,5 +36,5 @@
 }
 
 .movieDesc h1 {
-    font-size: 80px;
+    font-size: 70px;
 }
