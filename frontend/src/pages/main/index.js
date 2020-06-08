@@ -165,9 +165,6 @@ export default class Main extends Component {
                                 </section>
                             </article>
                         </Link>
-
-                        
-                        
                     ))}
                 </div>
             </div>
