@@ -126,7 +126,7 @@ export default class Main extends Component {
                         if(searchLoad) clearTimeout(searchLoad);
                         this.setState({
                             searchText: e.target.value,
-                            searchLoad: setTimeout(this.loadMovies, 2000)
+                            searchLoad: setTimeout(this.loadMovies, 1500)
                         });
                         }} type="text" placeholder="Search by movie title"/>
                 </div>

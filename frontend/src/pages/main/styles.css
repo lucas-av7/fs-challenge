@@ -39,7 +39,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 25px;
     padding-bottom: 60px;
     animation: showMovies 400ms forwards;
     animation-delay: 200ms;
@@ -187,32 +187,35 @@
 
 .order {
     width: 100%;
-    text-align: right;
+    text-align: center;
     margin-bottom: 20px;
     
 }
 
 .order button {
-    border: 4px solid #7159C1;
+    border: none;
     outline: none;
     width: 130px;
     height: 40px;
     font-size: 16px;
-    cursor: pointer;
-    background: transparent;
-    transition-duration: 400ms;
     color: white;
-}
-
-.order button:nth-child(1) {
-    border-radius: 6px 0 0 6px;
-}
-
-.order button:nth-child(2) {
-    border-radius: 0 6px 6px 0;
+    border-radius: 20px;
+    margin-right: 10px;
 }
 
 .order button:disabled {
     cursor: not-allowed;
+    background-color: #0F860F;
+    box-shadow: 0 6px 0 #013801, inset 0 6px 0 #0FBB0F;
+}
+
+.order button:enabled {
+    cursor: pointer;
     background: #7159C1;
+    box-shadow: 0 6px 0 #2F225B, inset 0 6px 0 #A292D6;
+}
+
+.order button:enabled:active {
+    background: #594697;
+    box-shadow: inset 0 8px 0 #2F225B;
 }
