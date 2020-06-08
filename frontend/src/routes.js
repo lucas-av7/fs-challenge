@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Main from './pages/main';
-//import Movie from './pages/movie';
+import Movie from './pages/movie';
 
 const Routes = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Main} />
-            {/* <Routes path="/movie/:i" component={Movie} /> */}
+            <Route path="/movie/:i" component={Movie} />
         </Switch>
     </BrowserRouter>
 )
