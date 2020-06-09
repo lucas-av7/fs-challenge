@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
+import { setFavorite, isFavorite } from '../../functions/setFavorite';
 
 import './styles.css'
 
@@ -10,6 +11,7 @@ export default class Movie extends Component {
         movieId: this.props.match.params.i,
         movieData: {},
         loading: true,
+        favorited: false,
         searchText: '',
         movies: [],
         recent: true,
@@ -27,6 +29,10 @@ export default class Movie extends Component {
                 moviePage: true
             })
         }
+
+        const favorited = isFavorite(this.state.movieId);
+        this.setState({favorited});
+
         this.loadDataMovie();
     }
 
@@ -37,7 +43,7 @@ export default class Movie extends Component {
     }
 
     render() {
-        const { movieData, loading, searchText, movies, recent, home, moviePage } = this.state;
+        const { movieData, loading, searchText, movies, recent, home, moviePage, favorited } = this.state;
         return (
         <div className="containerMovie">
             <div className={loading ? 'loadingOn' : 'lodingOff'}></div>
@@ -47,8 +53,13 @@ export default class Movie extends Component {
                     <h3>{movieData.Runtime} - {movieData.Year}</h3>
                     <h1>{movieData.Title}</h1>
                     <div className="rating">
-                        <p>IMDb: {movieData.imdbRating}</p>
-                        <p>&hearts;</p>
+                        <p className={movieData.imdbRating > 7 ? 'greenRating' : movieData.imdbRating > 5 ? 'yellowRating' : 'redRating'} >IMDb: {movieData.imdbRating} / 10</p>
+                        <p  className={favorited ? 'favoritedOn' : 'favoritedOff'}
+                            title={favorited ? 'Remove from favorites' : 'Favorite this movie'}
+                            onClick={() => {
+                            setFavorite(movieData.imdbID);
+                            this.setState({favorited: !favorited})
+                        }}>&hearts;</p>
                     </div>
                     <h3>Plot</h3>
                     <p>{movieData.Plot}</p>
@@ -59,8 +70,7 @@ export default class Movie extends Component {
                     <h3>Genre</h3>
                     <p>{movieData.Genre}</p>
                     <hr/>
-                    <h3>Director</h3>
-                    <p>{movieData.Director}</p>
+                    <h3>Director</h3>                    
                 </div>
                 <img src={movieData.Poster} alt={movieData.Title} />
             </div>

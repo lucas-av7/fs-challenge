@@ -75,37 +75,72 @@
     background: #512750;
     box-shadow: 0 6px 0 #341933, inset 0 6px 0 #653164;
     margin-bottom: 20px;
+    user-select: none;
 }
 
 .movieDesc button:active {
     background: #4D2B4C;
     box-shadow: inset 0 8px 0 #341933;
+    opacity: 0.8;
 }
 
 .rating {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .rating p {
     text-align: center;
     font-weight: bold;
-    line-height: 35px;
-    height: 35px;
-    width: auto;
     box-sizing: border-box;
-    background-color: #512750;
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 0 10px;
-    border-radius: 5px;
+    user-select: none;
 }
 
 .rating p:nth-child(1) {
     font-size: 18px;
+    line-height: 35px;
+    height: 35px;
+    width: auto;
+    border-radius: 5px;
 }
 
 .rating p:nth-child(2) {
     cursor: pointer;
     font-size: 35px;
+    line-height: 40px;
+    background: #512750;
+    box-shadow: 0 6px 0 #341933, inset 0 6px 0 #653164;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.rating p:nth-child(2):active {
+    background: #4D2B4C;
+    box-shadow: inset 0 8px 0 #341933;
+    opacity: 0.8;
+}
+
+.greenRating {
+    background-color: #0F860F;
+}
+
+.yellowRating {
+    background-color: #F19900;
+}
+
+.redRating {
+    background-color: #F84F37;
+}
+
+.favoritedOn {
+    color: red;
+}
+
+.favoritedOff {
     color: rgba(0, 0, 0, 0.3);
 }

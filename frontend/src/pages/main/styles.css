@@ -204,6 +204,7 @@
     color: white;
     border-radius: 20px;
     margin: 0 5px;
+    user-select: none;
 }
 
 .order button:disabled {
@@ -221,4 +222,5 @@
 .order button:enabled:active {
     background: #4D2B4C;
     box-shadow: inset 0 8px 0 #341933;
+    opacity: 0.8;
 }
