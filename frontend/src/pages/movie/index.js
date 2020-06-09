@@ -44,18 +44,21 @@ export default class Movie extends Component {
             <div className={!loading ? 'movieDataOn' : 'movieDataOff'}>
                 <div className="movieDesc">
                     <Link to={{ pathname: '/', state: { searchText, movies, recent, home, moviePage } }}><button>&#8678;</button></Link>
-                    <p>{movieData.Runtime} - {movieData.Year}</p>
+                    <h3>{movieData.Runtime} - {movieData.Year}</h3>
                     <h1>{movieData.Title}</h1>
-                    <p>IMDb: {movieData.imdbRating} Add to Favorites</p>
-                    <h3>Plot:</h3>
+                    <div className="rating">
+                        <p>IMDb: {movieData.imdbRating}</p>
+                        <p>&hearts;</p>
+                    </div>
+                    <h3>Plot</h3>
                     <p>{movieData.Plot}</p>
-
+                    <hr/>
                     <h3>Cast</h3>
                     <p>{movieData.Actors}</p>
-
+                    <hr/>
                     <h3>Genre</h3>
                     <p>{movieData.Genre}</p>
-
+                    <hr/>
                     <h3>Director</h3>
                     <p>{movieData.Director}</p>
                 </div>
