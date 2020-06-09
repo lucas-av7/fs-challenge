@@ -40,23 +40,8 @@ export default class Main extends Component {
         const { Search, Response } = responseSearch.data;
 
         if(Response === 'True') {
-            const Movies = Search.map(async movie => {
-                const id = movie.imdbID;
-                const responseMovie = await api.get(`/movie/${id}`);
-                const {Genre, imdbRating, Plot} = responseMovie.data;
-                const newMovie = movie;
-                newMovie['Genre'] = Genre;
-                newMovie['imdbRating'] = imdbRating;
-                newMovie['Plot'] = Plot;
-    
-                return newMovie;
-            })
-    
-            let valores = await Promise.all(Movies);
-
-            // Removendo objetos duplicados
-            valores = UniqueArraybyId(valores ,"imdbID");
-
+            // Removendo objetos duplicados pela api da OMDB
+            const valores = UniqueArraybyId(Search ,"imdbID");
             function UniqueArraybyId(collection, keyname) {
                       let output = [], 
                           keys = [];
