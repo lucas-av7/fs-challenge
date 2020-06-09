@@ -200,7 +200,7 @@
     font-size: 16px;
     color: white;
     border-radius: 20px;
-    margin-right: 10px;
+    margin: 0 5px;
 }
 
 .order button:disabled {

@@ -10,17 +10,26 @@ export default class Main extends Component {
 
     state = {
         movies: [],
-        searchText: this.props.location.state === undefined ? '' : this.props.location.state.searchText,
+        searchText: '',
         loading: false,
         home: true,
         searchLoad: null,
         Error: '',
-        recent: this.props.location.state === undefined ? true : this.props.location.state.recent,
+        recent: true,
         moviePage: false
     }
 
     componentDidMount() {
-        this.loadMovies();
+        if(this.props.location.state === undefined) return;
+        else {
+            this.setState({
+                searchText: this.props.location.state.searchText,
+                movies: this.props.location.state.movies,
+                recent: this.props.location.state.recent,
+                home: this.props.location.state.home,
+                moviePage: this.props.location.state.moviePage
+            })
+        }
     }
 
     loadMovies = async () => {
@@ -150,7 +159,7 @@ export default class Main extends Component {
                     </div>
                     { movies.map(movie => (
                         
-                        <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent} }}>
+                        <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent, movies} }}>
                             <article>
                                 <img src={movie.Poster} alt={movie.Title} />
                                 <section className="rate">

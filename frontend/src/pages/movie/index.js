@@ -9,10 +9,24 @@ export default class Movie extends Component {
     state = {
         movieId: this.props.match.params.i,
         movieData: {},
-        loading: true
+        loading: true,
+        searchText: '',
+        movies: [],
+        recent: true,
+        home: true,
+        moviePage: false
     }
 
     componentDidMount() {
+        if(this.props.location.state !== undefined) {
+            this.setState({
+                searchText: this.props.location.state.searchText,
+                movies: this.props.location.state.movies,
+                recent: this.props.location.state.recent,
+                home: false,
+                moviePage: true
+            })
+        }
         this.loadDataMovie();
     }
 
@@ -23,14 +37,13 @@ export default class Movie extends Component {
     }
 
     render() {
-        const { searchText, recent } = this.props.location.state;
-        const { movieData, loading } = this.state;
+        const { movieData, loading, searchText, movies, recent, home, moviePage } = this.state;
         return (
         <div className="containerMovie">
             <div className={loading ? 'loadingOn' : 'lodingOff'}></div>
             <div className={!loading ? 'movieDataOn' : 'movieDataOff'}>
                 <div className="movieDesc">
-                    <Link to={{ pathname: '/', state: { searchText, recent } }}>Voltar</Link>
+                    <Link to={{ pathname: '/', state: { searchText, movies, recent, home, moviePage } }}>Voltar</Link>
                     <p>{movieData.Runtime} - {movieData.Year}</p>
                     <h1>{movieData.Title}</h1>
                     <p>IMDb: {movieData.imdbRating} Add to Favorites</p>
