@@ -6,6 +6,20 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    animation: showMovieData 400ms forwards;
+    animation-delay: 200ms;
+    opacity: 0;
+}
+
+@keyframes showMovieData {
+    0% {
+        opacity: 0;
+        transform: scale(0.5)
+    }
+    100% {
+        opacity: 1; 
+        transform: scale(1)
+    }
 }
 
 .movieDataOn {
@@ -37,4 +51,23 @@
 
 .movieDesc h1 {
     font-size: 70px;
+}
+
+.movieDesc button {
+    border: none;
+    outline: none;
+    width: 70px;
+    height: 40px;
+    font-size: 36px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #7159C1;
+    box-shadow: 0 6px 0 #2F225B, inset 0 6px 0 #A292D6;
+    margin-bottom: 20px;
+}
+
+.movieDesc button:active {
+    background: #594697;
+    box-shadow: inset 0 8px 0 #2F225B;
 }
