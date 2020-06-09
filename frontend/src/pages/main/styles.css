@@ -28,11 +28,13 @@
     transition: max-width 400ms;
     font-size: 18px;
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .searchBox input:focus {
     max-width: 500px;
-    box-shadow: 0 0 0 4px #7159C1;
+    box-shadow: 0 0 0 4px #512750;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .movieList {
@@ -85,7 +87,7 @@
     opacity: 0;
     width: 38px;
     height: 38px;
-    background-color: #7159C1;
+    background-color: #512750;
     position: absolute;
     top: 8px;
     right: 8px;
@@ -117,8 +119,8 @@
     padding: 10px;
 }
 
-.movieInfo strong {
-    color: #7159C1;
+.movieInfo h2 {
+    color: #0F860F;
 }
 
 .movieInfo p {
@@ -133,7 +135,7 @@
     height: 50px;
     border-radius: 50%;
     border: 5px solid;
-    border-color: #7159C1 #7159C1 white;
+    border-color: #512750 #512750 white;
     animation: loading linear 1.5s infinite;
 }
 
@@ -206,16 +208,16 @@
 .order button:disabled {
     cursor: not-allowed;
     background-color: #0F860F;
-    box-shadow: 0 6px 0 #013801, inset 0 6px 0 #0FBB0F;
+    box-shadow: 0 6px 0 #013801, inset 0 6px 0 #00A700;
 }
 
 .order button:enabled {
     cursor: pointer;
-    background: #7159C1;
-    box-shadow: 0 6px 0 #2F225B, inset 0 6px 0 #A292D6;
+    background: #512750;
+    box-shadow: 0 6px 0 #341933, inset 0 6px 0 #653164;
 }
 
 .order button:enabled:active {
-    background: #594697;
-    box-shadow: inset 0 8px 0 #2F225B;
+    background: #4D2B4C;
+    box-shadow: inset 0 8px 0 #341933;
 }

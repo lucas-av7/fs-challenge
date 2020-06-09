@@ -151,7 +151,7 @@ export default class Main extends Component {
                                     <p>{movie.imdbRating}</p>
                                 </section>
                                 <section className="movieInfo">
-                                    <strong>{movie.Title}</strong>
+                                    <h2>{movie.Title}</h2>
                                     <p>{movie.Year}</p>
                                     <p>{movie.Genre}</p>
                                     <br />
