@@ -13,7 +13,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 80px;
 }
 
 .searchBox input {
@@ -180,7 +180,7 @@
 
 .homeOn img,
 .errorOn img {
-    width: 100%;
+    width: 70%;
 }
 
 .homeOff,

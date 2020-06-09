@@ -9,6 +9,7 @@
     animation: showMovieData 400ms forwards;
     animation-delay: 200ms;
     opacity: 0;
+    padding: 50px 0;
 }
 
 @keyframes showMovieData {
