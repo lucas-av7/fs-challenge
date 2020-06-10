@@ -3,6 +3,7 @@ import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import Cinema from './img/cinema.svg';
 import Void from './img/void.svg';
+import { haveFavorite } from '../../functions/favorite';
 
 import './styles.css'
 
@@ -105,6 +106,7 @@ export default class Main extends Component {
 
     render() {
         const { movies, loading, home, Error, recent, moviePage, searchText } = this.state;
+        const favorites = haveFavorite();
 
         return (
             <div className="container">
@@ -122,6 +124,8 @@ export default class Main extends Component {
                             searchLoad: setTimeout(this.loadMovies, 1500)
                         });
                         }} type="text" placeholder="Search by movie title" value={searchText}/>
+
+                        <button disabled={!favorites} id="favoriteButton">&hearts;</button>
                 </div>
 
                 <div className={loading ? 'loadingOn' : 'loadingOff'}></div>

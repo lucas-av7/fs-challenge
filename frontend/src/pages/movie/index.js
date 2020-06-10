@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
-import { setFavorite, isFavorite } from '../../functions/setFavorite';
+import { setFavorite, isFavorite } from '../../functions/favorite';
 
 import './styles.css'
 
@@ -54,6 +54,7 @@ export default class Movie extends Component {
                     <h1>{movieData.Title}</h1>
                     <div className="rating">
                         <p className={movieData.imdbRating > 7 ? 'greenRating' : movieData.imdbRating > 5 ? 'yellowRating' : 'redRating'} >IMDb: {movieData.imdbRating} / 10</p>
+                        
                         <p  className={favorited ? 'favoritedOn' : 'favoritedOff'}
                             title={favorited ? 'Remove from favorites' : 'Favorite this movie'}
                             onClick={() => {

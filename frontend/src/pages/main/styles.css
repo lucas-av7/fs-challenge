@@ -13,6 +13,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    align-items: center;
     margin-top: 80px;
 }
 
@@ -29,12 +30,14 @@
     font-size: 18px;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.7);
+    margin-right: 5px;
 }
 
 .searchBox input:focus {
-    max-width: 500px;
+    max-width: 450px;
     box-shadow: 0 0 0 4px #512750;
     background-color: rgba(255, 255, 255, 0.9);
+    margin-right: 9px;
 }
 
 .movieList {
@@ -189,13 +192,15 @@
 }
 
 .order {
+    display: flex;
     width: 100%;
-    text-align: center;
     margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
     
 }
 
-.order button {
+.order button, #favoriteButton {
     border: none;
     outline: none;
     width: 130px;
@@ -213,14 +218,31 @@
     box-shadow: 0 6px 0 #013801, inset 0 6px 0 #00A700;
 }
 
-.order button:enabled {
+.order button:enabled, #favoriteButton {
     cursor: pointer;
     background: #512750;
     box-shadow: 0 6px 0 #341933, inset 0 6px 0 #653164;
 }
 
-.order button:enabled:active {
+.order button:enabled:active, #favoriteButton:active {
     background: #4D2B4C;
     box-shadow: inset 0 8px 0 #341933;
     opacity: 0.8;
+}
+
+#favoriteButton {
+    font-size: 35px;
+    line-height: 40px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    color: red;
+}
+
+#favoriteButton:disabled {
+    cursor: not-allowed;
+    background: #4D2B4C;
+    box-shadow: inset 0 8px 0 #341933;
+    opacity: 0.8;
+    color: rgba(0, 0, 0, 0.3);
 }

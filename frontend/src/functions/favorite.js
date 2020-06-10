@@ -30,3 +30,18 @@ export function isFavorite(id) {
         return true;
     }
 }
+
+export function haveFavorite() {
+    const favoriteMovies = localStorage.getItem('favoriteMovies');
+    if(favoriteMovies === null) return false
+    const moviesArray = JSON.parse(favoriteMovies);
+    return (moviesArray.length === 0) ? false : true;
+}
+
+export function getFavorites() {
+    const favoriteMovies = localStorage.getItem('favoriteMovies');
+    if(favoriteMovies === null) return []
+    else {
+        return JSON.parse(favoriteMovies);
+    }
+}
