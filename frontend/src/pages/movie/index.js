@@ -71,7 +71,8 @@ export default class Movie extends Component {
                     <h3>Genre</h3>
                     <p>{movieData.Genre}</p>
                     <hr/>
-                    <h3>Director</h3>                    
+                    <h3>Director</h3>
+                    <p>{movieData.Director}</p>                  
                 </div>
                 <img src={movieData.Poster} alt={movieData.Title} />
             </div>
