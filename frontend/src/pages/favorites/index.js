@@ -18,8 +18,13 @@ export default class Favorites extends Component {
 
     async getMovies() {
         const favoriteMovies = getFavorites();
-        const movies =  await getMovieData(favoriteMovies);
-        this.setState({ movies, loading: false });
+        if(favoriteMovies.lenth !== 0) {
+            const movies =  await getMovieData(favoriteMovies);
+            this.setState({ movies, loading: false });
+        } else {
+            this.setState({ movies: [], loading: false });
+        }
+        
     }
 
     render() {
