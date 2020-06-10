@@ -1,0 +1,64 @@
+.buttonBack {
+    width: 95%;
+    max-width: 1300px;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.buttonBack button {
+    border: none;
+    outline: none;
+    width: 70px;
+    height: 40px;
+    font-size: 36px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #512750;
+    box-shadow: 0 6px 0 #341933, inset 0 6px 0 #653164;
+    user-select: none;
+}
+
+.movieDesc button:active {
+    background: #4D2B4C;
+    box-shadow: inset 0 8px 0 #341933;
+    opacity: 0.8;
+}
+
+.favoriteTitle {
+    margin-top: -40px;
+}
+
+.favoriteList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 60px;
+    animation: showMovies 400ms forwards;
+    animation-delay: 200ms;
+    opacity: 0;
+    margin-top: 20px;
+}
+
+.favoriteList article {
+    position: relative;
+    width: 250px;
+    height: 346px;
+    margin: 0 8px 20px;
+    overflow: hidden;
+}
+
+.favoriteList article img {
+    width: 100%;
+}
+
+.favoriteList article:hover .movieInfo {
+    bottom: 0;
+}
+
+.favoriteList article:hover .rate {
+    opacity: 1;
+}

@@ -125,7 +125,7 @@ export default class Main extends Component {
                         });
                         }} type="text" placeholder="Search by movie title" value={searchText}/>
 
-                        <button disabled={!favorites} id="favoriteButton">&hearts;</button>
+                        <Link to={'/favorites'}><button disabled={!favorites} id="favoriteButton">&hearts;</button></Link>
                 </div>
 
                 <div className={loading ? 'loadingOn' : 'loadingOff'}></div>
