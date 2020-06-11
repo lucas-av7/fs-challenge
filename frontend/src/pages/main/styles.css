@@ -246,3 +246,13 @@
     opacity: 0.8;
     color: rgba(0, 0, 0, 0.3);
 }
+
+.heartOn {
+    font-size: 35px;
+    line-height: 40px;
+    color: red !important;
+}
+
+.heartOff {
+    display: none;
+}

@@ -3,7 +3,7 @@ import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import Cinema from './img/cinema.svg';
 import Void from './img/void.svg';
-import { haveFavorite } from '../../functions/favorite';
+import { haveFavorite, getFavorites } from '../../functions/favorite';
 
 import './styles.css'
 
@@ -107,6 +107,7 @@ export default class Main extends Component {
     render() {
         const { movies, loading, home, Error, recent, moviePage, searchText } = this.state;
         const favorites = haveFavorite();
+        const favoriteList = getFavorites();
 
         return (
             <div className="container">
@@ -155,6 +156,7 @@ export default class Main extends Component {
                                     <p>{movie.imdbRating}</p>
                                 </section>
                                 <section className="movieInfo">
+                                    <p className={(favoriteList.indexOf(movie.imdbID) !== -1) ? 'heartOn' : 'heartOff' }>&hearts;</p>
                                     <h2>{movie.Title}</h2>
                                     <p>{movie.Year}</p>
                                     <p>{movie.Genre}</p>
