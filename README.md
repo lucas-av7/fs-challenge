@@ -1,5 +1,6 @@
 # AV7 Movies
 Procure por filmes e séries e tenha detalhes como: Enredo, elenco, direção, nota e mais!
+Veja online: [Heroku](https://av7-movies-front.herokuapp.com/).
 
 ## Tecnologias usadas
 
