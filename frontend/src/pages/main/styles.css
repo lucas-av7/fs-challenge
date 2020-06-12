@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 80px;
-    z-index: 0;
+    z-index: 2;
 }
 
 .searchBox input {
@@ -169,6 +169,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .homeImgsOff {
