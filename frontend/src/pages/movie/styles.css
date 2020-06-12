@@ -2,7 +2,7 @@
     width: 95%;
     max-width: 1300px;
     min-height: 100vh;
-    max-height: auto;
+    height: auto;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -26,7 +26,7 @@
 .movieDataOn {
     width: 100%;
     min-height: 100vh;
-    max-height: auto;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -37,10 +37,6 @@
     display: none;
 }
 
-.movieDesc {
-    width: 50%;
-}
-
 .movieDataOn img {
     height: 500px;
     border-radius: 20px;
@@ -49,6 +45,7 @@
 .movieDesc {
     box-sizing: border-box;
     padding: 35px;
+    width: 50%;
 }
 
 .movieDesc h1 {
@@ -110,7 +107,7 @@
 
 .rating p:nth-child(2) {
     cursor: pointer;
-    font-size: 35px;
+    font-size: 25px;
     line-height: 40px;
     background: #512750;
     box-shadow: 0 6px 0 #341933, inset 0 6px 0 #653164;

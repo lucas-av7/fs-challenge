@@ -1,0 +1,16 @@
+@media screen and (max-width: 800px) {
+
+    .movieDesc h1 {
+        font-size: 50px;
+    }
+
+    .movieDesc {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .movieDataOn img {
+        height: 300px;
+        margin-bottom: 30px;
+    }
+}

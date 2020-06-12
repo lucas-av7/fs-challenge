@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setFavorite, isFavorite } from '../../functions/favorite';
 
 import './styles.css'
+import './responsive.css'
 
 export default class Movie extends Component {
 

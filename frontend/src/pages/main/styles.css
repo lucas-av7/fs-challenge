@@ -15,6 +15,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 80px;
+    z-index: 0;
 }
 
 .searchBox input {
@@ -184,7 +185,7 @@
 
 .homeOn img,
 .errorOn img {
-    width: 70%;
+    width: 60%;
 }
 
 .homeOff,
@@ -232,7 +233,7 @@
 }
 
 #favoriteButton {
-    font-size: 35px;
+    font-size: 25px;
     line-height: 40px;
     border-radius: 50%;
     height: 40px;
@@ -249,7 +250,7 @@
 }
 
 .heartOn {
-    font-size: 35px;
+    font-size: 25px;
     line-height: 40px;
     color: red !important;
 }
