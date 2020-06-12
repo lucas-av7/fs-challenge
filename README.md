@@ -28,7 +28,7 @@ Faça o download das dependências e rode o projeto executando os códigos abaix
 ```
 $ cd backend
 $ npm install
-$ npm run dev
+$ npm start
 ```
 
 - Frontend
