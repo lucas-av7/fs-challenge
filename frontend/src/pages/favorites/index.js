@@ -29,6 +29,8 @@ export default class Favorites extends Component {
 
     render() {
         const { movies, loading } = this.state;
+        const favoriteList = getFavorites();
+        
         return(
             <div className="container">
                 <div className="buttonBack">
@@ -47,6 +49,7 @@ export default class Favorites extends Component {
                                         <p>{movie.imdbRating}</p>
                                     </section>
                                     <section className="movieInfo">
+                                        <p className={(favoriteList.indexOf(movie.imdbID) !== -1) ? 'heartOn' : 'heartOff' }>&hearts;</p>
                                         <h2>{movie.Title}</h2>
                                         <p>{movie.Year}</p>
                                         <p>{movie.Genre}</p>

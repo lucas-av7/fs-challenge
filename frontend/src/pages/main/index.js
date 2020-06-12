@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import Cinema from './img/cinema.svg';
 import Void from './img/void.svg';
 import { haveFavorite, getFavorites } from '../../functions/favorite';
+import { searchMovies } from '../../functions/getApi';
 
 import './styles.css'
 
@@ -37,36 +37,16 @@ export default class Main extends Component {
         const { searchText, recent } = this.state;
         if(searchText === '') return;
         this.setState({loading: true, movies: [], home: false, Error: '', moviePage: false});
-        const responseSearch = await api.get(`/search/${searchText}`);
-        const { Search, Response } = responseSearch.data;
-
-        if(Response === 'True') {
-            // Removendo objetos duplicados pela api da OMDB
-            const valores = UniqueArraybyId(Search ,"imdbID");
-            function UniqueArraybyId(collection, keyname) {
-                      let output = [], 
-                          keys = [];
-        
-                      collection.forEach(item => {
-                          let key = item[keyname];
-                          if(keys.indexOf(key) === -1) {
-                              keys.push(key);
-                              output.push(item);
-                          }
-                      });
-                return output;
-           };
-    
-            this.setState({movies: valores, loading: false, Error: '', home: false, moviePage: true});
-
+        const movies = await searchMovies(searchText);
+        if(movies.response === true) {
+            this.setState({movies: movies.valores, loading: false, Error: '', home: false, moviePage: true});
             if(recent) {
                 this.recentOrder();
             } else {
                 this.ratingOrder();
             }
         } else {
-            const { Error } = responseSearch.data;
-            this.setState({movies: [], loading: false, home: false, Error, moviePage: false});
+            this.setState({movies: [], loading: false, home: false, Error: movies.Error, moviePage: false});
         }
     };
 
