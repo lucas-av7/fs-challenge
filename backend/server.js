@@ -8,4 +8,4 @@ app.use(cors());
 // Rotas
 app.use('/api', require('./src/routes'));
 
-app.listen(process.env.APP_PORT);
+app.listen(3007);
