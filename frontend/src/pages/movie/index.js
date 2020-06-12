@@ -16,7 +16,8 @@ export default class Movie extends Component {
         movies: [],
         recent: true,
         home: true,
-        moviePage: false
+        moviePage: false,
+        backFavorite: false
     }
 
     componentDidMount() {
@@ -28,6 +29,10 @@ export default class Movie extends Component {
                 home: false,
                 moviePage: true
             })
+        }
+
+        if(this.props.location.backFavorite !== undefined) {
+            this.setState({ backFavorite: this.props.location.backFavorite.back });
         }
 
         const favorited = isFavorite(this.state.movieId);
@@ -43,13 +48,13 @@ export default class Movie extends Component {
     }
 
     render() {
-        const { movieData, loading, searchText, movies, recent, home, moviePage, favorited } = this.state;
+        const { movieData, loading, searchText, movies, recent, home, moviePage, favorited, backFavorite } = this.state;
         return (
         <div className="containerMovie">
             <div className={loading ? 'loadingOn' : 'lodingOff'}></div>
             <div className={!loading ? 'movieDataOn' : 'movieDataOff'}>
                 <div className="movieDesc">
-                    <Link to={{ pathname: '/', state: { searchText, movies, recent, home, moviePage } }}><button>&#8678;</button></Link>
+                    <Link to={{ pathname: backFavorite ? '/favorites' : '/', state: { searchText, movies, recent, home, moviePage } }}><button>&#8678;</button></Link>
                     <h3>{movieData.Runtime} - {movieData.Year}</h3>
                     <h1>{movieData.Title}</h1>
                     <div className="rating">

@@ -30,7 +30,7 @@ export default class Favorites extends Component {
     render() {
         const { movies, loading } = this.state;
         const favoriteList = getFavorites();
-        
+
         return(
             <div className="container">
                 <div className="buttonBack">
@@ -42,7 +42,7 @@ export default class Favorites extends Component {
 
                 <div className="favoriteList">
                     { movies.map(movie => (
-                            <Link  key={movie.imdbID} to={`/movie/${movie.imdbID}`}>
+                            <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, backFavorite: {back: true} }}>
                                 <article>
                                     <img src={movie.Poster} alt={movie.Title} />
                                     <section className="rate">

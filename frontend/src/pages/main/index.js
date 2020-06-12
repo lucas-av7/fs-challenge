@@ -129,7 +129,7 @@ export default class Main extends Component {
                     </div>
                     { movies.map(movie => (
                         
-                        <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent, movies} }}>
+                        <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent, movies}, backFavorite: false }}>
                             <article>
                                 <img src={movie.Poster} alt={movie.Title} />
                                 <section className="rate">
