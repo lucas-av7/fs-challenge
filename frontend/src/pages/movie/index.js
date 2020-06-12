@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import { setFavorite, isFavorite } from '../../functions/favorite';
+import { getMovieData } from '../../functions/getApi';
 
 import './styles.css'
 import './responsive.css'
@@ -44,8 +44,8 @@ export default class Movie extends Component {
 
     loadDataMovie = async () => {
         const { movieId } = this.state;
-        const responseMovie = await api.get(`/movie/${movieId}`);
-        this.setState({ movieData: responseMovie.data, loading: false });
+        const responseMovie = await getMovieData([movieId]);
+        this.setState({ movieData: responseMovie[0], loading: false });
     }
 
     render() {
