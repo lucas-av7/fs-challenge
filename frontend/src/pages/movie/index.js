@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { setFavorite, isFavorite } from '../../functions/favorite';
+import { toggleFavorite, isFavorite } from '../../functions/favorite';
 import { getMovieData } from '../../functions/getApi';
 
 import './styles.css'
@@ -64,7 +64,7 @@ export default class Movie extends Component {
                         <p  className={favorited ? 'favoritedOn' : 'favoritedOff'}
                             title={favorited ? 'Remove from favorites' : 'Favorite this movie'}
                             onClick={() => {
-                            setFavorite(movieData.imdbID);
+                            toggleFavorite(movieData.imdbID);
                             this.setState({favorited: !favorited})
                         }}>&hearts;</p>
                     </div>

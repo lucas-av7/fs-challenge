@@ -1,47 +1,31 @@
-export function setFavorite(id) {
-    const favorites = localStorage.getItem('favoriteMovies');
-    if (favorites === null) {
-        const moviesString = JSON.stringify([id]);
-        localStorage.setItem('favoriteMovies', moviesString)
+const getFavorites = () => {
+    return JSON.parse(localStorage.getItem('favoriteMovies')) || [];
+}
+
+const setFavorites = favoriteMovies => {
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+}
+
+const isFavorite = movieId => {
+    const favoriteMovies = getFavorites();
+    return favoriteMovies.includes(movieId);
+}
+
+const haveFavorite = () => {
+    const favoriteMovies = getFavorites();
+    return favoriteMovies.length > 0;
+}
+
+const toggleFavorite = movieId => {
+    let favoriteMovies = getFavorites();
+
+    if(isFavorite(movieId)) {
+        favoriteMovies.splice(favoriteMovies.indexOf(movieId), 1);
     } else {
-        const favoriteMovies = localStorage.getItem('favoriteMovies');
-        const moviesArray = JSON.parse(favoriteMovies);
-        const indexMovie = moviesArray.indexOf(id);
-        if(indexMovie === -1) {
-            moviesArray.push(id);
-            const moviesString = JSON.stringify(moviesArray);
-            localStorage.setItem('favoriteMovies', moviesString);
-        } else {
-            moviesArray.splice(indexMovie, 1);
-            const moviesString = JSON.stringify(moviesArray);
-            localStorage.setItem('favoriteMovies', moviesString);
-        }
+        favoriteMovies.push(movieId);
     }
+
+    setFavorites(favoriteMovies);
 }
 
-export function isFavorite(id) {
-    const favoriteMovies = localStorage.getItem('favoriteMovies');
-    if(favoriteMovies === null) return false
-    const moviesArray = JSON.parse(favoriteMovies);
-    const indexMovie = moviesArray.indexOf(id);
-    if(indexMovie === -1) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-export function haveFavorite() {
-    const favoriteMovies = localStorage.getItem('favoriteMovies');
-    if(favoriteMovies === null) return false
-    const moviesArray = JSON.parse(favoriteMovies);
-    return (moviesArray.length === 0) ? false : true;
-}
-
-export function getFavorites() {
-    const favoriteMovies = localStorage.getItem('favoriteMovies');
-    if(favoriteMovies === null) return []
-    else {
-        return JSON.parse(favoriteMovies);
-    }
-}
+export { getFavorites, setFavorites, isFavorite, haveFavorite, toggleFavorite }
