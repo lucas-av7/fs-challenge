@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Cinema from './img/cinema.svg';
 import Void from './img/void.svg';
+import ImgNotFound from '../../img/img-not-found.jpg';
 import { haveFavorite, getFavorites } from '../../functions/favorite';
 import { searchMovies } from '../../functions/getApi';
 
@@ -131,7 +132,10 @@ export default class Main extends Component {
                         
                         <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent, movies}, backFavorite: false }}>
                             <article>
-                                <img src={movie.Poster} alt={movie.Title} />
+                                <img src={movie.Poster} onError={(e) => {
+                                    e.target.onError = null;
+                                    e.target.src = ImgNotFound;
+                                }} alt={movie.Title} />
                                 <section className="rate">
                                     <p>{movie.imdbRating}</p>
                                 </section>

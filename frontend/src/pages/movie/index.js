@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toggleFavorite, isFavorite } from '../../functions/favorite';
 import { getMovieData } from '../../functions/getApi';
+import ImgNotFound from '../../img/img-not-found.jpg';
 
 import './styles.css'
 import './responsive.css'
@@ -80,7 +81,10 @@ export default class Movie extends Component {
                     <h3>Director</h3>
                     <p>{movieData.Director}</p>                  
                 </div>
-                <img src={movieData.Poster} alt={movieData.Title} />
+                <img src={movieData.Poster} onError={(e) => {
+                    e.target.onError = null;
+                    e.target.src = ImgNotFound;
+                 }} alt={movieData.Title} />
             </div>
         </div>
     )}
