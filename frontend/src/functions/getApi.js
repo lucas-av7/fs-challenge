@@ -11,7 +11,7 @@ export async function getMovieData(movieId) {
         const valores = await Promise.all(moviesData);
         return valores;
     } catch (err) {
-        return [];
+        return [{Title: 'Database connection lost!'}];
     }
     
 }
