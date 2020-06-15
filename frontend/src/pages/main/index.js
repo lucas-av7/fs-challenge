@@ -70,16 +70,16 @@ export default class Main extends Component {
     ratingOrder = () => {
         const { movies } = this.state;
         movies.sort((a, b) => {
-            const numberA = parseFloat(a.imdbRating);
-            const numberB = parseFloat(b.imdbRating);
+            // Alguns filmes tem nota 'N/A', o que faz dar erro no sort()
+            let notaA = a.imdbRating, notaB = b.imdbRating;
+            notaA = (notaA === 'N/A') ? 0 : parseFloat(notaA);
+            notaB = (notaB === 'N/A') ? 0 : parseFloat(notaB);
 
-            if (numberB < numberA) {
+            if (notaB < notaA) {
                 return -1;
-              }
-            else if (numberA < numberB) {
+              } else if (notaA < notaB) {
                 return 1;
-              }
-            else return 0;
+              } else return 0;
         });
         this.setState({movies, recent: false});
     }
