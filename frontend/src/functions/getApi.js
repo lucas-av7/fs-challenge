@@ -16,12 +16,15 @@ export async function getMovieData(movieId) {
     
 }
 
-export async function searchMovies(searchText) {
+export async function searchMovies(searchText, page) {
     try {
-        const responseSearch = await api.get(`/search/${searchText}`);
-        const { Search, Response } = responseSearch.data;
+        const responseSearch = await api.get(`/search/${searchText}/${page}`);
+        const { Search, Response} = responseSearch.data;
+        
 
         if(Response === 'True') {
+            const { totalResults  } = responseSearch.data;
+            const totalPages = Math.floor(totalResults / 10);
             // Removendo objetos duplicados pela api da OMDB
             const valores = UniqueArraybyId(Search ,"imdbID");
             function UniqueArraybyId(collection, keyname) {
@@ -37,7 +40,7 @@ export async function searchMovies(searchText) {
                 return output;
             };
 
-            return {response: true, valores };
+            return {response: true, valores, totalPages };
 
         } else {
             const { Error } = responseSearch.data;

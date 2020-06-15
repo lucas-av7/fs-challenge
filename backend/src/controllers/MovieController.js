@@ -2,7 +2,7 @@ const {api, apiSearch, apiData} = require('../services/api');
 
 module.exports = {
       async getMovies(req, res) {
-      const movies = await api.get(apiSearch + req.params.s);
+      const movies = await api.get(apiSearch + req.params.s + `&page=${req.params.p}`);
 
       if(movies.data.Response === 'True') {
         const MoviesMerge = movies.data.Search.map(async movie => {

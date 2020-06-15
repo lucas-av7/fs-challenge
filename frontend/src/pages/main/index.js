@@ -12,6 +12,8 @@ export default class Main extends Component {
 
     state = {
         movies: [],
+        page: 1,
+        totalPages: 1,
         searchText: '',
         loading: false,
         home: true,
@@ -29,18 +31,20 @@ export default class Main extends Component {
                 movies: this.props.location.state.movies,
                 recent: this.props.location.state.recent,
                 home: this.props.location.state.home,
-                moviePage: this.props.location.state.moviePage
+                moviePage: this.props.location.state.moviePage,
+                page: this.props.location.state.page,
+                totalPages: this.props.location.state.totalPages,
             })
         }
     }
 
     loadMovies = async () => {
-        const { searchText, recent } = this.state;
+        const { searchText, recent, page } = this.state;
         if(searchText === '') return;
         this.setState({loading: true, movies: [], home: false, Error: '', moviePage: false});
-        const movies = await searchMovies(searchText);
+        const movies = await searchMovies(searchText, page);
         if(movies.response === true) {
-            this.setState({movies: movies.valores, loading: false, Error: '', home: false, moviePage: true});
+            this.setState({movies: movies.valores, loading: false, Error: '', home: false, moviePage: true, totalPages: movies.totalPages });
             if(recent) {
                 this.recentOrder();
             } else {
@@ -86,7 +90,7 @@ export default class Main extends Component {
 
 
     render() {
-        const { movies, loading, home, Error, recent, moviePage, searchText } = this.state;
+        const { movies, loading, home, Error, recent, moviePage, searchText, totalPages, page } = this.state;
         const favorites = haveFavorite();
         const favoriteList = getFavorites();
 
@@ -102,6 +106,7 @@ export default class Main extends Component {
 
                         if(searchLoad) clearTimeout(searchLoad);
                         this.setState({
+                            page: 1,
                             searchText: e.target.value,
                             searchLoad: setTimeout(this.loadMovies, 1500)
                         });
@@ -150,6 +155,18 @@ export default class Main extends Component {
                             </article>
                         </Link>
                     ))}
+
+                    <div className="divPagination">
+                        <button disabled={page === 1} onClick={() => {
+                            this.setState({ page: page - 1 });
+                            setTimeout(this.loadMovies, 300);
+                        }}>&#8678;</button>
+                        <p>{page} / {totalPages}</p>
+                        <button disabled={page === totalPages} onClick={() => {
+                            this.setState({ page: page + 1 });
+                            setTimeout(this.loadMovies, 300);
+                        }}>&#8680;</button>
+                    </div>
                 </div>
             </div>
         )
