@@ -135,7 +135,7 @@ export default class Main extends Component {
                     </div>
                     { movies.map(movie => (
                         
-                        <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent, movies}, backFavorite: false }}>
+                        <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, state: { searchText, recent, movies, page, totalPages}, backFavorite: false }}>
                             <article>
                                 <img src={movie.Poster} onError={(e) => {
                                     e.target.onError = null;
