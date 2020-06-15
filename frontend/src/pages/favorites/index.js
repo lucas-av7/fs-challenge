@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getFavorites } from '../../functions/favorite';
 import { getMovieData } from '../../functions/getApi';
+import ImgNotFound from '../../img/img-not-found.jpg';
 
 import './styles.css'
 
@@ -44,7 +45,10 @@ export default class Favorites extends Component {
                     { movies.map(movie => (
                             <Link  key={movie.imdbID} to={{ pathname: `/movie/${movie.imdbID}`, backFavorite: {back: true} }}>
                                 <article>
-                                    <img src={movie.Poster} alt={movie.Title} />
+                                    <img src={movie.Poster} onError={(e) => {
+                                        e.target.onError = null;
+                                        e.target.src = ImgNotFound;
+                                    }} alt={movie.Title} />
                                     <section className="rate">
                                         <p>{movie.imdbRating}</p>
                                     </section>
